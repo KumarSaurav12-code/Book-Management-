@@ -38,9 +38,8 @@ public class BookController {
 		return booksService.getById(id);
 	}
 	
-	@GetMapping("/quiz/{quizId}")
-	public List<Book> getByIQuizId(@PathVariable Long quizId) {
-		System.out.println(booksService.getByQuizId(quizId));
-		return booksService.getByQuizId(quizId);
+	@GetMapping("/author/{authorId}")
+	public List<Book> getByIBookId(@PathVariable Long authorId) {
+		return booksService.getByAuthorId(authorId);
 	}
 }

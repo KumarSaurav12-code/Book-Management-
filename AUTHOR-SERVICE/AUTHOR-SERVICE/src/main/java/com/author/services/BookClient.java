@@ -13,6 +13,6 @@ import com.author.entities.Book;
 @FeignClient(name = "BOOKS-SERVICE")
 public interface BookClient {
 	
-	@GetMapping("/question/quiz/{quizId}")
-	List<Book> getByIBookId(@PathVariable Long bookId);
+	@GetMapping("/books/author/{authorId}")
+	List<Book> getByIBookId(@PathVariable Long authorId);
 }

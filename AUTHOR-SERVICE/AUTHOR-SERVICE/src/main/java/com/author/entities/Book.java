@@ -4,18 +4,20 @@ public class Book {
 	
 	private Long bookId;
 	private String bookTitle;
-	private Long genre;
+	private String genre;
+	private boolean isAvailable;
 	private Long authorId;
 	
 	public Book() {
 		super();
 	}
 
-	public Book(Long bookId, String bookTitle, Long genre, Long authorId) {
+	public Book(Long bookId, String bookTitle, String genre, boolean isAvailable, Long authorId) {
 		super();
 		this.bookId = bookId;
 		this.bookTitle = bookTitle;
 		this.genre = genre;
+		this.isAvailable = isAvailable;
 		this.authorId = authorId;
 	}
 
@@ -35,12 +37,20 @@ public class Book {
 		this.bookTitle = bookTitle;
 	}
 
-	public Long getGenre() {
+	public String getGenre() {
 		return genre;
 	}
 
-	public void setGenre(Long genre) {
+	public void setGenre(String genre) {
 		this.genre = genre;
+	}
+
+	public boolean isAvailable() {
+		return isAvailable;
+	}
+
+	public void setAvailable(boolean isAvailable) {
+		this.isAvailable = isAvailable;
 	}
 
 	public Long getAuthorId() {
@@ -50,7 +60,12 @@ public class Book {
 	public void setAuthorId(Long authorId) {
 		this.authorId = authorId;
 	}
+
+	@Override
+	public String toString() {
+		return "Book [bookId=" + bookId + ", bookTitle=" + bookTitle + ", genre=" + genre + ", isAvailable="
+				+ isAvailable + ", authorId=" + authorId + "]";
+	}
 	
 	
-		
 }

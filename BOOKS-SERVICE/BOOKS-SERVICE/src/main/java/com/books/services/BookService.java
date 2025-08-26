@@ -11,5 +11,5 @@ public interface BookService {
 	
 	Book getById(Long id);
 	
-	List<Book> getByQuizId(Long quizId);
+	List<Book> getByAuthorId(Long authorId);
 }

@@ -34,7 +34,7 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public List<Book> getByQuizId(Long authorId) {
+	public List<Book> getByAuthorId(Long authorId) {
 		return booksRepository.findByAuthorId(authorId);
 	}
 	
