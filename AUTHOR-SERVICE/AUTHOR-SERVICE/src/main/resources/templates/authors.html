@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Authors</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            display: flex;
+            gap: 5%;
+        }
+        .form-container {
+            width: 40%;
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .table-container {
+            width: 55%;
+        }
+        input, button {
+            display: block;
+            width: 100%;
+            margin: 8px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- Left: Author Form -->
+    <div class="form-container">
+        <h3>Add Author</h3>
+        <form th:action="@{/author}" th:object="${author}" method="post">
+            <input type="text" th:field="*{name}" placeholder="Name" required/>
+            <input type="text" th:field="*{country}" placeholder="Country" required/>
+            <button type="submit">Add Author</button>
+        </form>
+    </div>
+
+    <!-- Right: Author Table -->
+    <div class="table-container">
+        <h3>Authors List</h3>
+        <table>
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Country</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="author : ${authors}">
+                <td th:text="${author.id}"></td>
+                <td th:text="${author.name}"></td>
+                <td th:text="${author.country}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Books Management</title>
+    <link rel="stylesheet" th:href="@{/css/booksStyle.css}" />
+</head>
+<body>
+<h2>Books Management</h2>
+
+<div class="container">
+    <!-- Left Side: Form -->
+    <div class="form-section">
+        <h3>Add a New Book</h3>
+        <form action="/books" method="post">
+            <label>Title:</label>
+            <input type="text" name="bookTitle" required/>
+
+            <label>Genre:</label>
+            <input type="text" name="genre" required/>
+
+            <label>Available:</label>
+            <input type="checkbox" name="available" value="true"/>
+
+            <label>Author ID:</label>
+            <input type="number" name="authorId" required/>
+
+            <input type="submit" value="Add Book"/>
+        </form>
+    </div>
+
+    <!-- Right Side: Table -->
+    <div class="table-section">
+        <h3>Books List</h3>
+        <table>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Available</th>
+                <th>Author ID</th>
+            </tr>
+            <tr th:each="book : ${books}">
+                <td th:text="${book.bookId}"></td>
+                <td th:text="${book.bookTitle}"></td>
+                <td th:text="${book.genre}"></td>
+                <td th:text="${book.available}"></td>
+                <td th:text="${book.authorId}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
