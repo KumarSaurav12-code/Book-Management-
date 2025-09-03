@@ -1,14 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Books Management</title>
-    <link rel="stylesheet" th:href="@{/css/booksStyle.css}" />
+	<head>
+	<title>Books Management</title>
+	<link rel="stylesheet" th:href="@{/css/booksStyle.css}" />
 </head>
 <body>
 <h2>Books Management</h2>
 
+<!-- Error Message -->
+<div th:if="${errorMessage}" id="bm-alert">
+    <span th:text="${errorMessage}"></span>
+</div>
+
 <div class="container">
-    <!-- Left Side: Form -->
+	<!-- Left Side: Form -->
     <div class="form-section">
         <h3>Add a New Book</h3>
         <form action="/books" method="post">

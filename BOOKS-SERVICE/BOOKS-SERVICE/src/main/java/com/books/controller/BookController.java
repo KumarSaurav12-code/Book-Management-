@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.books.services.BookService;
+import com.books.controller.Impl.BookControllerImpl;
 import com.books.entities.*;
 
 @Controller
@@ -23,14 +24,22 @@ import com.books.entities.*;
 public class BookController {
 	
 	private BookService booksService;
+	private BookControllerImpl bookControllerImpl;
+	private boolean isBookExists=false;
+	List<Book> cmbdBooks=null;
 
-	public BookController(BookService booksService) {
+	public BookController(BookService booksService, BookControllerImpl bookControllerImpl) {
 		super();
 		this.booksService = booksService;
+		this.bookControllerImpl = bookControllerImpl;
 	}
 	
 	@PostMapping
 	public String addBook(@ModelAttribute Book book) {
+		if (bookControllerImpl.isBookAlreadyExists(book,cmbdBooks)) {
+			isBookExists = true;
+			return "redirect:/books"; // Redirect with error if book exists
+		}
         booksService.add(book);
         return "redirect:/books"; // reloads table after adding
     }
@@ -38,6 +47,11 @@ public class BookController {
 	@GetMapping
 	public String showBooks(Model model) {
         model.addAttribute("books", booksService.get());
+        if(isBookExists) {
+        	model.addAttribute("errorMessage", "Book already exists!");
+			isBookExists = false; // reset after showing the message
+        }
+        cmbdBooks = booksService.get();
         return "books";  // maps to books.jsp
     }
 	
@@ -72,14 +86,4 @@ public class BookController {
 	public List<Book> get() {
 		return booksService.get();
 	}
-    
-//	@GetMapping("/{id}")
-//	public Book getById(@PathVariable Long id) {
-//		return booksService.getById(id);
-//	}
-//	
-//	@GetMapping("/author/{authorId}")
-//	public List<Book> getByIBookId(@PathVariable Long authorId) {
-//		return booksService.getByAuthorId(authorId);
-//	}
 }

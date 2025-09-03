@@ -2,48 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Authors</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        .container {
-            display: flex;
-            gap: 5%;
-        }
-        .form-container {
-            width: 40%;
-            background: #f9f9f9;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
-        .table-container {
-            width: 55%;
-        }
-        input, button {
-            display: block;
-            width: 100%;
-            margin: 8px 0;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background: #f2f2f2;
-        }
-    </style>
+    <link rel="stylesheet" th:href="@{/css/authorStyle.css}" />
 </head>
 <body>
+<h2>Authors Management</h2>
+
+<div th:if="${errorMessage}" id="bm-alert">
+    <span th:text="${errorMessage}"></span>
+</div>
+
 <div class="container">
     <!-- Left: Author Form -->
     <div class="form-container">
@@ -64,6 +31,7 @@
                 <th>ID</th>
                 <th>Name</th>
                 <th>Country</th>
+                <th>Books</th>
             </tr>
             </thead>
             <tbody>
@@ -71,7 +39,14 @@
                 <td th:text="${author.id}"></td>
                 <td th:text="${author.name}"></td>
                 <td th:text="${author.country}"></td>
-            </tr>
+				<td>
+					<select class="book-dropdown">
+						<option th:if="${#lists.isEmpty(author.Books)}" disabled>No Books</option>
+						<option th:each="book : ${author.Books}" th:value="${book.bookId}"
+									th:text="${book.bookTitle}"></option>
+					</select>
+				</td>
+			</tr>
             </tbody>
         </table>
     </div>
